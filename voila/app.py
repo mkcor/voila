@@ -370,7 +370,9 @@ class Voila(Application):
         )
 
         jenv_opt = {"autoescape": True}  # we might want extra options via cmd line like notebook server
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.template_paths), extensions=['jinja2.ext.i18n'], **jenv_opt)
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.template_paths),
+                                 extensions=['jinja2.ext.i18n', 'jinja2.ext.do'],
+                                 **jenv_opt)
         nbui = gettext.translation('nbui', localedir=os.path.join(ROOT, 'i18n'), fallback=True)
         env.install_gettext_translations(nbui, newstyle=False)
         self.contents_manager = LargeFileManager(parent=self)
